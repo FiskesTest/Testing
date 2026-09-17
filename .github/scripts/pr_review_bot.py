@@ -14,7 +14,7 @@ PR_NUMBER = os.environ.get("PR_NUMBER", "")
 
 TEAM_FILE = os.environ.get("TEAM_FILE", ".github/pr-review-team.txt")
 MIN_REVIEWS = 2
-REMINDER_DELAY_HOURS = 2 # Don't remind if the PR was updated/created recently
+REMINDER_DELAY_HOURS = 1 # Don't remind if the PR was updated/created recently
 
 def github_api(path):
     url = f"https://api.github.com/{path.lstrip('/')}"
@@ -57,7 +57,7 @@ def handle_pr_event():
     if pr.get("draft"): return
 
     discord_message(
-        f"**PR #{PR_NUMBER} needs {MIN_REVIEWS} reviews**\n\n"
+        f"**PR #{PR_NUMBER}**\n"
         f"**{pr['title']}**\n@everyone\n\n<{pr['html_url']}>"
     )
 
