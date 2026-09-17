@@ -28,7 +28,12 @@ def github_api(path):
 
 def discord_message(content):
     payload = json.dumps({"content": content, "allowed_mentions": {"parse": ["users", "everyone"]}})
-    request = urllib.request.Request(DISCORD_WEBHOOK, data=payload.encode("utf-8"), headers={"Content-Type": "application/json"})
+    
+    request = urllib.request.Request(DISCORD_WEBHOOK, data=payload.encode("utf-8"), headers={
+        "Content-Type": "application/json",
+        "User-Agent": "github-pr-review-bot" 
+    })
+
     urllib.request.urlopen(request)
 
 def load_team():
